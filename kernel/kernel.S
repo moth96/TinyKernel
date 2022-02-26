@@ -12,7 +12,7 @@ intr_entry_table:
 section .text
 intr%1entry:		 ; 每个中断处理程序都要压入中断向量号,所以一个中断类型一个中断处理程序，自己知道自己的中断向量号是多少
 
-   %2				 ; 中断若有错误码会压在eip后面
+   %2				 ; 中断若有错误码会压在eip后面 
 ; 以下是保存上下文环境
    push ds
    push es
@@ -35,7 +35,7 @@ section .data
 
 section .text
 global intr_exit
-intr_exit:
+intr_exit:	     
 ; 以下是恢复上下文环境
    add esp, 4			   ; 跳过中断号
    popad
@@ -78,4 +78,19 @@ VECTOR 0x1c,ZERO
 VECTOR 0x1d,ERROR_CODE
 VECTOR 0x1e,ERROR_CODE
 VECTOR 0x1f,ZERO 
-VECTOR 0x20,ZERO
+VECTOR 0x20,ZERO	;时钟中断对应的入口
+VECTOR 0x21,ZERO	;键盘中断对应的入口
+VECTOR 0x22,ZERO	;级联用的
+VECTOR 0x23,ZERO	;串口2对应的入口
+VECTOR 0x24,ZERO	;串口1对应的入口
+VECTOR 0x25,ZERO	;并口2对应的入口
+VECTOR 0x26,ZERO	;软盘对应的入口
+VECTOR 0x27,ZERO	;并口1对应的入口
+VECTOR 0x28,ZERO	;实时时钟对应的入口
+VECTOR 0x29,ZERO	;重定向
+VECTOR 0x2a,ZERO	;保留
+VECTOR 0x2b,ZERO	;保留
+VECTOR 0x2c,ZERO	;ps/2鼠标
+VECTOR 0x2d,ZERO	;fpu浮点单元异常
+VECTOR 0x2e,ZERO	;硬盘
+VECTOR 0x2f,ZERO	;保留
